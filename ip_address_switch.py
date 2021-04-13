@@ -13,16 +13,20 @@ for line_f1 in f1:                #Comparing the file to get a unique IP address
       break
   break
 
-host = #ip address of the router which is blocked to access the internet
+search_ip  #ip address of the router which is blocked to access the internet
 username = #user
 password = #password
 
-connection = routeros_api.RouterOsApiPool(host, username ,password)
+connection = routeros_api.RouterOsApiPool(search_ip, username ,password)
 
 try: api= connection.get_api()
 except: quit()
 
 list_1 = api.get_resource('/ip/firewall/nat/')
+
+for index1 in range(len(list_1)):
+  for m,n in list_1[index1].iteritems():
+    if('to-addresses' and 'chain') in m and search_ip and 
 
 parameters_1 = {'chain':'srcnat','action':'src-nat','to-addresses':'10.101.127.25'}
 parameters_2 = {'to-addresses': x }
