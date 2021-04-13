@@ -10,7 +10,6 @@ for line_f1 in f1:                #Comparing the file to get a unique IP address
     if(line_f1 != line_f2):
       print(line_f1.split('\n'))
       x = line_f1.split('\n')[0]
-      f2.write(line_f1)
       break
   break
 
@@ -36,6 +35,12 @@ list_1.set(id=list_2,**parameters_2)
 list_2 = api.get_resource('/ip/firewall/connection/')
 list_3 = list_2.get()
 
+list_4 =  api.get_resource('/ip/address/')
+list_4.add(address =x, interface = bridge1)
+
+list_5 = api.get_resource('/routing/bgp/network/')
+list_5.add(network = x, synchronize='no')
+
 search_ip = host
 search_name ='reply-dst-address'
 search_id = 'id'
@@ -51,8 +56,11 @@ for index in  range(len(list_3)):
 for c  in  list_id:
   parameters_4 = {'id' : c } 
   list_4 = list_2.get(**parameters_4)
-  
-  
+
+
+f2.write(line_f1)
+f2.close()
+f1.close()
 connection.disconnect()            
   
   
