@@ -3,9 +3,9 @@
 import routeros_api
 
 f1 = open("/home/sanket/ip_list.txt", 'r+b')     #file containing list of available IP address
-f2 = open("/home/sanket/used_ip.txt", 'r+b')
+f2 = open("/home/sanket/used_ip.txt", 'r+b')     #file containing list of address that have already been used
 
-for line_f1 in f1:
+for line_f1 in f1:                #Comparing the file to get a unique IP address from the ip_list.txt file
   for line_f2 in f2:
     if(line_f1 != line_f2):
       print(line_f1.split('\n'))
@@ -14,8 +14,9 @@ for line_f1 in f1:
       break
   break
 
-z = '10.101.127.1'
-connection = routeros_api.RouterOsApiPool(z,'python','aV9GymDzUZK3VmBcK7sxa7RY4J')
+host = #ip address of the router which is blocked to access the internet
+
+connection = routeros_api.RouterOsApiPool(host,'python','aV9GymDzUZK3VmBcK7sxa7RY4J')
 try: api= connection.get_api()
 except: quit()
 
