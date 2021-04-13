@@ -1,10 +1,8 @@
 #code start
 
-
 import routeros_api
-import sys
-  '''
-f1 = open("/home/sanket/ip_list.txt", 'r+b')
+
+f1 = open("/home/sanket/ip_list.txt", 'r+b')     #file containing list of available IP address
 f2 = open("/home/sanket/used_ip.txt", 'r+b')
 
 for line_f1 in f1:
