@@ -6,11 +6,18 @@ f1 = open("/home/sanket/ip_list.txt", 'r+b')     #file containing list of availa
 f2 = open("/home/sanket/used_ip.txt", 'r+b')     #file containing list of address that have already been used
 
 for line_f1 in f1:                #Comparing the file to get a unique IP address from the ip_list.txt file
+  
   for line_f2 in f2:
-    if(line_f1 != line_f2):
-      print(line_f1.split('\n'))
-      x = line_f1.split('\n')[0]
+    
+    x= line_f2.split('\n')[0]
+    y = line_f1.split('\n')[0]
+    
+    if(x != y):
+      f2.write(line_f1)
       break
+      
+    else: 
+      continue   
   break
 
 search_ip  #ip address of the router which is blocked to access the internet
@@ -23,18 +30,19 @@ try: api= connection.get_api()
 except: quit()
 
 list_1 = api.get_resource('/ip/firewall/nat/')
+list_6 = list_1.get()
+index1 = 0
 
-for index1 in range(len(list_1)):
-  for m,n in list_1[index1].iteritems():
-    if('to-addresses' and 'chain') in m and search_ip and 
-
-parameters_1 = {'chain':'srcnat','action':'src-nat','to-addresses':'10.101.127.25'}
+for index1 in range(len(list_5)):
+  for m,n in list_5[index1].iteritems():
+    if('to-addresses' in m and search_ip in n):
+      list_nat.append(list_5[index1]['id']
+                      
 parameters_2 = {'to-addresses': x }
+                      
+for o in nat_list:
+                      list_1.set(id=o, **parameters_2)
 
-try : list_2 = list_1.get(**parameters_1)[0]["id"]
-except: quit()
-
-list_1.set(id=list_2,**parameters_2)
 
 list_2 = api.get_resource('/ip/firewall/connection/')
 list_3 = list_2.get()
@@ -66,7 +74,5 @@ f2.write(line_f1)
 f2.close()
 f1.close()
 connection.disconnect()            
-  
-  
   
   
