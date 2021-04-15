@@ -18,48 +18,28 @@ connection = routeros_api.RouterOsApiPool(search_ip, username ,password)
 try: api= connection.get_api()
 except: quit()
 
-list_1 = api.get_resource('/ip/firewall/nat/')
-list_6 = list_1.get()
-
-index1 = 0
-
-for index1 in range(len(list_5)):           #searching for NAT rules with the old IP address
-  for m,n in list_5[index1].iteritems():
-    if('to-addresses' in m and search_ip in n):
-      list_nat.append(list_5[index1]['id']
-                      
-parameters = {'to-addresses': x }
-                      
-for o in nat_list:
-                      list_1.set(id=o, **parameters)    #moving the bloacked IP NAT rules over to the new IP address
-                      
-list_2 = api.get_resource('/ip/firewall/connection/')   #Flush out connections with old IP address
-list_3 = list_2.get()
-
-list_4 =  api.get_resource('/ip/address/')      #add address in the router
-list_4.add(address =x, interface = bridge1)
-
-list_5 = api.get_resource('/routing/bgp/network/')    #add address in BGP routing
-list_5.add(network = x, synchronize='no')
-
-search_ip = host
-search_name ='reply-dst-address'
-search_id = 'id'
-list_id = []
-index = 0
-
-for index in  range(len(list_3)):
-  for a,b in list_3[index].iteritems():
-    if search_ip in b and search_name in a:
-      list_id.append(list_3[index]['id'])
-
       
-for c  in  list_id:       #flush connections
-  try: list_2.remove(id=c)
-  except: continue
+def loop_function(list_pass):
+      index = 0
+      list = list_pass.get()
+      list_new = []
+      for index in range(len(list)):           #searching for NAT rules with the old IP address
+            for m,n in list[index].iteritems():
+                  if(search_ip in n):
+                        list_new.append(list[index1]['id']     
+                                        
+            for o in list_new:
+                      list_pass.remove(id=o)    #moving the bloacked IP NAT rules over to the new IP address
+                      
+list_1 = api.get_resource('/ip/firewall/connection/')   #Flush out connections with old IP address
+loop_function(list_1)
 
-f2.write(line_f1)
+list_2 = api.get_resource('/ip/address')   #Remove old IP address from the router
+loop_function(list_2)
+                                        
+list_3 = api.get_resource('/routing/bgp/network/')   #Remove BGP of old address
+loop_function(list_3)
+                                        
 f2.close()
-f1.close()
 connection.disconnect()            
   
