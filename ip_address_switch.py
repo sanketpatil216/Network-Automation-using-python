@@ -5,20 +5,19 @@ import routeros_api
 f1 = open("/home/sanket/ip_list.txt", 'r+b')     #file containing list of available IP address
 f2 = open("/home/sanket/used_ip.txt", 'r+b')     #file containing list of address that have already been used
 
+file2 = f2.read()
+
 for line_f1 in f1:                #Comparing the file to get a unique IP address from the ip_list.txt file
   
-  for line_f2 in f2:
-    
     x= line_f2.split('\n')[0]
-    y = line_f1.split('\n')[0]
-    
-    if(x != y):
-      f2.write(line_f1)
-      break
-      
+   
+    if x not in file2:
+        f2.write(x)
+        f2.write('\n')
+        break
+        
     else: 
       continue   
-  break
 
 search_ip = #ip address of the router which is blocked to access the internet
 username = #user
