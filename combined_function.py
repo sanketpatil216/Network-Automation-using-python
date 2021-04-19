@@ -36,19 +36,18 @@ if { #ban           #Loop will run if IP address is banned
 
 
     for line_f1 in f1:                #Comparing the file to get a unique IP address from the ip_list.txt file
-
-        for line_f2 in f2:
-    
-            x= line_f1.split('\n')[0]
-            y = line_f2.split('\n')[0]
-    
-            if(x != y):
-                f2.write(line_f1)
-                break
-      
-            else: 
-                continue   
+  
+    x= line_f2.split('\n')[0]
+   
+    if x not in file2:
+        f2.write(x)
+        f2.write('\t')
+        f2.write(search_ip)
+        f2.write('\n')
         break
+        
+    else: 
+      continue   
         
     list_1 = api.get_resource('/ip/firewall/nat/')   #Getting NAT rules
     list_2 = funcation_list(list_1)
