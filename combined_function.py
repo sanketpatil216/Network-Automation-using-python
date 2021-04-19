@@ -1,4 +1,5 @@
 import routeros_api
+import sys
 
 f1 = open("/home/sanket/ip_list.txt", 'rt')     #file containing list of available IP address
 f2 = open("/home/sanket/used_ip.txt", 'rt')     #file containing list of address that have already been used
@@ -70,6 +71,33 @@ if { #ban           #Loop will run if IP address is banned
     
 if { #unban            #It would loop if the previously banned IP is now unbanned
 
+    f2 = open('used_ip.txt','r')
+    data = f2.readlines()
+                 
+    op = []
+                                      
+    for lines in data:
+        try:
+            x = lines.split('\t')[0]
+            y = lines.split('\t')[1]
+    
+            y = y.strip()
+    
+            if y!= search_ip:
+                op.append(a)
+        
+            else:
+                search_ip =x
+                      
+        except: continue
+                         
+    f2 = open('used_ip.txt','w')
+
+    f2.writelines(op)
+    f2.close()
+      
+    
+    
     list_1 =  api.get_resource('/ip/address/')    #Remove address from the router
     function_remove(funcation_list,list_1)
     
@@ -79,15 +107,6 @@ if { #unban            #It would loop if the previously banned IP is now unbanne
     list_3 = api.get_resource('/routing/bgp/network/')  #Remove address from BGP routing
     function_remove(funcation_list,list_3)
     
-    data = f2.read()
-    f2.close()
-    
-    data = data.replace(nat_ip, '')
-    
-    f2.open('/home/sanket/used_ip.txt','wt')
-    f2.write(data)        #Erasing the IP so it can be used again
-    
-    f2.close()
     
     }
 
