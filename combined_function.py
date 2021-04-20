@@ -2,8 +2,8 @@
 import routeros_api
 import sys
 
-f1 = open("/home/thomas/ip_list.txt", 'rt')     #file containing list of available IP address
-f2 = open("/home/thomas/used_ip.txt", 'rt')     #file containing list of address that have already been used
+f1 = open("ip_list.txt", 'rt')     #file containing list of available IP address
+f2 = open("used_ip.txt", 'rt')     #file containing list of address that have already been used
 
 file2 = f2.read()
 
