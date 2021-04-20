@@ -1,14 +1,16 @@
+                             
 import routeros_api
 import sys
 
-f1 = open("/home/sanket/ip_list.txt", 'rt')     #file containing list of available IP address
-f2 = open("/home/sanket/used_ip.txt", 'rt')     #file containing list of address that have already been used
+f1 = open("/home/thomas/ip_list.txt", 'rt')     #file containing list of available IP address
+f2 = open("/home/thomas/used_ip.txt", 'rt')     #file containing list of address that have already been used
 
-
+file2 = f2.read()
+list_nat = []
 search_ip = #ip address of the router which is blocked to access the internet passed by the application
-username = #user
-password = #password
-
+username = 'python' #user
+password = 'aV9GymDzUZK3VmBcK7sxa7RY4J' #password
+action = 
 connection = routeros_api.RouterOsApiPool(search_ip, username ,password)
 
 try: api= connection.get_api()
@@ -22,10 +24,10 @@ def function_list(list_pass):    #Funcation to loop through the list
     for index in range(len(list)):           
         for m,n in list[index].iteritems():
             if(search_ip in n):
-                list_new.append(list[index]['id']     
+                list_new.append(list[index]['id'])   
     return list_new      
           
-def function_remove(list_new,list_pass)  #Function to remove parameters
+def function_remove(list_new,list_pass):  #Function to remove parameters
     
     for o in list_new:
         
@@ -33,43 +35,43 @@ def function_remove(list_new,list_pass)  #Function to remove parameters
         except: continue
 
 
-if { #ban           #Loop will run if IP address is banned
+if action == 'ban':       #Loop will run if IP address is banned
 
 
     for line_f1 in f1:                #Comparing the file to get a unique IP address from the ip_list.txt file
   
-    x= line_f2.split('\n')[0]
+        x= line_f1.split('\n')[0]
    
-    if x not in file2:
-        f2.write(x)
-        f2.write('\t')
-        f2.write(search_ip)
-        f2.write('\n')
-        break
+        if x not in file2:
+            f2.write(x)
+            f2.write('\t')
+            f2.write(search_ip)
+            f2.write('\n')
+            break
         
-    else: 
-      continue   
+        else: 
+            continue   
         
     list_1 = api.get_resource('/ip/firewall/nat/')   #Getting NAT rules
-    list_2 = funcation_list(list_1)
+    list_2 = function_list(list_1)
     
     parameters = {'to-addresses': x }
     for each_rule in list_2:
-        list_1.set(id=o, **parameters)     #changing NAT rules
+        list_1.set(id=each_rule, **parameters)     #changing NAT rules
      
     list_3 = api.get_resource('/ip/firewall/connection/')   #Flush out connections with old IP address
-    function_remove(function_list,list_3)
+    function_remove(function_list(list_3),list_3)
 
     list_4 =  api.get_resource('/ip/address/')      #adding address in the router
-    list_4.add(address =x, interface = bridge1)
+    list_4.add(address =x, interface = 'bridge1')
 
     list_5 = api.get_resource('/routing/bgp/network/')    #adding address in BGP routing
     list_5.add(network = x, synchronize='no')
 
     f1.close()
-    }
     
-if { #unban            #It would loop if the previously banned IP is now unbanned
+    
+if action == 'unban':            #It would loop if the previously banned IP is now unbanned
 
     f2 = open('used_ip.txt','r')
     data = f2.readlines()
@@ -99,15 +101,14 @@ if { #unban            #It would loop if the previously banned IP is now unbanne
     
     
     list_1 =  api.get_resource('/ip/address/')    #Remove address from the router
-    function_remove(funcation_list,list_1)
+    function_remove(function_list(list_1),list_1)
     
-    list_2 = api.get_resource('/ip/firewall/nat/')  #Flush out connections with old IP address
-    function_remove(funcation_list,list_2)
+    parameters_2 = {'to-addresses': search_ip }   #Change NAT rules
+    for each_rule_2 in list_2:
+        list_1.set(id=each_rule_2, **parameters_2)
     
     list_3 = api.get_resource('/routing/bgp/network/')  #Remove address from BGP routing
-    function_remove(funcation_list,list_3)
+    function_remove(function_list(list_3),list_3)
     
-    
-    }
 
-connection.disconnect()    
+connection.disconnect()   
