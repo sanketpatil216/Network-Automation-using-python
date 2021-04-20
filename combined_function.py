@@ -6,7 +6,7 @@ f1 = open("/home/thomas/ip_list.txt", 'rt')     #file containing list of availab
 f2 = open("/home/thomas/used_ip.txt", 'rt')     #file containing list of address that have already been used
 
 file2 = f2.read()
-list_nat = []
+
 search_ip = #ip address of the router which is blocked to access the internet passed by the application
 username = 'python' #user
 password = 'aV9GymDzUZK3VmBcK7sxa7RY4J' #password
