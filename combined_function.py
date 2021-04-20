@@ -9,7 +9,7 @@ file2 = f2.read()
 
 search_ip = #ip address of the router which is blocked to access the internet passed by the application
 username = 'python' #user
-password = 'aV9GymDzUZK3VmBcK7sxa7RY4J' #password
+password = '12345 #password
 action = 
 connection = routeros_api.RouterOsApiPool(search_ip, username ,password)
 
