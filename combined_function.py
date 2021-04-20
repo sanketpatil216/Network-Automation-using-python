@@ -55,7 +55,8 @@ if action == 'ban':       #Loop will run if IP address is banned
     list_1 = api.get_resource('/ip/firewall/nat/')   #Getting NAT rules
     list_2 = function_list(list_1)
     
-    parameters = {'to-addresses': x }
+    parameters = {'to-addresses': y }
+   
     for each_rule in list_2:
         list_1.set(id=each_rule, **parameters)     #changing NAT rules
      
