@@ -14,8 +14,8 @@ Tasks accomplished
 
 Adding the new IP address to the router
 Change the Firewall NAT rules on old IP address to this new IP address.  
-Adding the new address in BGP Networks
-Terminating the connections with the old IP address
+Adding the new address in BGP Networks.
+Terminating the connections with the old IP address.
 
 
 Code2:revert_changes.py
@@ -23,6 +23,6 @@ Task accomplished
 
 
 Remove the IP address from the router.
-Remove the address from BGP networks
-Change the Firewall NAT rules to the original IP
-Terminate the connections with the replaced IP
+Remove the address from BGP networks.
+Change the Firewall NAT rules to the original IP.
+Terminate the connections with the replaced IP.
