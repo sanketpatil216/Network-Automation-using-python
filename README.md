@@ -8,6 +8,7 @@ The IP address that was blocked by the application unblocks it after 30min so th
 
 
 Code: Combining both the codes in one python code
+action and seach_ip parameters are passed by the program blocks the IP.
 
 Code1: ip_address_switch.py
 Tasks accomplished 
