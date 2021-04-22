@@ -104,8 +104,11 @@ if action == 'unban':            #It would loop if the previously banned IP is n
     list_1 =  api.get_resource('/ip/address/')    #Remove address from the router
     function_remove(function_list(list_1),list_1)
     
+    list_2 =  api.get_resource('/ip/firewall/nat')
+    list_3 = function_list(list_2)
+    
     parameters_2 = {'to-addresses': search_ip }   #Change NAT rules
-    for each_rule_2 in list_2:
+    for each_rule_2 in list_3:
         list_1.set(id=each_rule_2, **parameters_2)
     
     list_3 = api.get_resource('/routing/bgp/network/')  #Remove address from BGP routing
