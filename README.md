@@ -7,7 +7,7 @@ The application that blocked the IP addess also triggered this python script whi
 The IP address that was blocked by the application unblocks it after 30min so the 2ND code is to revert back the changes made by the first code.
 
 
-Code: Final Combining both the codes in once python code
+Code: Combining both the codes in one python code
 
 Code1: ip_address_switch.py
 Tasks accomplished 
